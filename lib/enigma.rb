@@ -35,12 +35,13 @@ class Enigma
       encrypt_hash = {encryption: encryption, key: key, date: time_converter_for_date_string}
     else
       encrypt_hash = {encryption: encryption, key: key, date: date}
+    end
 
 
 
     # key_generator_for_encryption
     # time_converter_for_encryption
     # encrypt_hash
-    require "pry"; binding.pry
+    # require "pry"; binding.pry
   end
 end

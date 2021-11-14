@@ -11,13 +11,8 @@ RSpec.describe Enigma do
     expect(@enigma).to be_an_instance_of(Enigma)
   end
 
-  it '#encrypt' do
-    expected = {
-                encryption: "keder ohulw",
-                key: "02715",
-                date: "040895"
-              }
-    expect(@enigma.encrypt("hello world", "02715", "040895")).to eq(expected)
+  it '#encryption_helper' do
+    expect(@enigma.encryption_helper).not_to eq(nil)
   end
 
   it '#time_converter_for_encryption' do
@@ -33,4 +28,14 @@ RSpec.describe Enigma do
 
     expect(@enigma.key_generator_for_encryption).not_to eq(nil)
   end
+
+  it '#encrypt' do
+    expected = {
+      encryption: "keder ohulw",
+      key: "02715",
+      date: "040895"
+    }
+    expect(@enigma.encrypt("hello world", "02715", "040895")).to eq(expected)
+  end
 end
+
