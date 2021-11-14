@@ -11,8 +11,8 @@ RSpec.describe Enigma do
     expect(@enigma).to be_an_instance_of(Enigma)
   end
 
-  it '#encryption_helper' do
-    expect(@enigma.encryption_helper).not_to eq(nil)
+  it '#key_generator_for_encryption' do
+    expect(@enigma.key_generator_for_encryption).not_to eq(nil)
   end
 
   it '#time_converter_for_encryption' do
@@ -24,9 +24,13 @@ RSpec.describe Enigma do
     expect(@enigma.time_converter_for_date_string).to eq(expected)
   end
 
-  it '#key_generator_for_encryption' do
+  it '#key_string_generator_for_encryption' do
 
     expect(@enigma.key_generator_for_encryption).not_to eq(nil)
+  end
+
+  xit '#offset' do
+    expect(@enigma.offset)
   end
 
   it '#encrypt' do
