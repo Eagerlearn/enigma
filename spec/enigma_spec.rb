@@ -11,7 +11,7 @@ RSpec.describe Enigma do
     expect(@enigma).to be_an_instance_of(Enigma)
   end
 
-  xit '#encrypt' do
+  it '#encrypt' do
     expected = {
                 encryption: "keder ohulw",
                 key: "02715",
