@@ -4,9 +4,26 @@ class Enigma
   def initialize
     @alphabet_array = ("a".."z").to_a << " "
   end
-
   #compare message to alphabet_array for shift to do encryption
-  def encryption_helper
+
+  # generate keys for encryption offset
+  def key_generator_for_encryption
+    key_string_array = []
+    # require "pry"; binding.pry
+    key_string_to_array = key_string_generator_for_encryption.each_char.to_a
+    key_string_to_array.each_cons(2) do |pair|
+      key_string_array << pair
+    end
+    keys_integer_array = key_string_array.map do |key|
+      key.join.to_i
+    end
+    keys_integer_array
+  end
+  #if key is nil then generate string helper method
+  def key_string_generator_for_encryption
+    sample_array = (0..9).to_a.sample, (0..9).to_a.sample,
+    (0..9).to_a.sample, (0..9).to_a.sample, (0..9).to_a.sample
+    sample_array.join
   end
   #if date is nil use today's date helper method
   def time_converter_for_date_string
@@ -17,31 +34,19 @@ class Enigma
     date_string_holder.join
   end
 
-  #if key is nil then generate random key helper method
-  def key_generator_for_encryption
-    sample_array = (0..9).to_a.sample, (0..9).to_a.sample,
-                  (0..9).to_a.sample, (0..9).to_a.sample, (0..9).to_a.sample
-    sample_array.join
-  end
-
   def encrypt(encryption, key = nil, date = nil)
     encrypt_hash = Hash.new(0)
 
+    require "pry"; binding.pry
+
     if key == nil && date == nil
-      encrypt_hash = {encryption: encryption, key: key_generator_for_encryption, date: time_converter_for_date_string}
+      encrypt_hash = {encryption: encryption, key: key_string_generator_for_encryption, date: time_converter_for_date_string}
     elsif key == nil && date != nil
-      encrypt_hash = {encryption: encryption, key: key_generator_for_encryption, date: date}
+      encrypt_hash = {encryption: encryption, key: key_string_generator_for_encryption, date: date}
     elsif key != nil && date == nil
       encrypt_hash = {encryption: encryption, key: key, date: time_converter_for_date_string}
     else
       encrypt_hash = {encryption: encryption, key: key, date: date}
     end
-
-
-
-    # key_generator_for_encryption
-    # time_converter_for_encryption
-    # encrypt_hash
-    # require "pry"; binding.pry
   end
 end
