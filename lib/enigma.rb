@@ -54,7 +54,7 @@ class Enigma
     offset_array << date_string[-1].to_i
   end
 
-  def encrypt(encryption, key = key_generator_for_encryption, date = time_converter_for_date_string)
+  def encrypt(encryption, key = key_string_generator_for_encryption, date = time_converter_for_date_string)
     new_message_array = []
     encrypt_array = encryption.split(//)
     dates = date_offset_maker(date)
