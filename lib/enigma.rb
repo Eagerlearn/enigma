@@ -76,10 +76,11 @@ class Enigma
     encrypted = {encryption: new_message_array.join, key: key, date: date}
   end
 
-  def decrypt(decryption, key = key_generator_for_encryption, date = time_converter_for_date_string)
+  def decrypt(decryption, key, date)
     new_message_array = []
     decrypt_array = decryption.each_char.to_a
     dates = date_offset_maker(date)
+    # require "pry"; binding.pry
     keys = key_converter(key)
 
     decrypt_array.each_with_index do |let, index|
