@@ -3,7 +3,6 @@ require 'date'
 class Enigma
   def initialize
     @alphabet_array = ("a".."z").to_a << " "
-    # key_string_generator_for_encryption
   end
   # generate keys for encryption offset
   def key_generator_for_encryption
@@ -56,16 +55,12 @@ class Enigma
 
   def encrypt(encryption, key = key_string_generator_for_encryption, date = time_converter_for_date_string)
     new_message_array = []
-    encrypt_array = encryption.split(//)
+    encrypt_array = encryption.each_char.to_a
     dates = date_offset_maker(date)
     keys = key_converter(key)
-    # no_key = key_converter(key=nil)
-    # require "pry"; binding.pry
     encrypt_array.each_with_index do |let, index|
-# require "pry"; binding.pry
       if index % 4 == 0
         first_letter = @alphabet_array.index(let) + (dates[0] + keys[0])
-        # require "pry"; binding.pry
         new_message_array << @alphabet_array.rotate(first_letter)[0]
       elsif index % 4 == 1
         first_letter = @alphabet_array.index(let) + (dates[1] + keys[1])
