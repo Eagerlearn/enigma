@@ -51,7 +51,7 @@ RSpec.describe Enigma do
                 }
     expect(@enigma.encrypt("hello world", "02715", "040895")).to eq(expected)
     expect(@enigma.encrypt("hello world", "02715")).to eq(expected_2)
-    # expect(@enigma.encrypt("hello world")).to eq(Hash)
+    # expect(@enigma.encrypt("hello world")).not to_eq(nil)
   end
 
   it '#decrypt' do

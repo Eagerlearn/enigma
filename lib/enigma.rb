@@ -28,15 +28,16 @@ class Enigma
   end
   #converts the incoming key, if given into an array
   def key_converter(key)
-    key_string_array = []
-    key_string_to_array = key.each_char.to_a
-    key_string_to_array.each_cons(2) do |pair|
-      key_string_array << pair
+    string_array = []
+    # require "pry"; binding.pry
+    string_to_array = key.each_char.to_a
+    string_to_array.each_cons(2) do |pair|
+      string_array << pair
     end
-    keys_integer_array = key_string_array.map do |key|
+    integer_array = string_array.map do |key|
       key.join.to_i
     end
-    keys_integer_array
+    integer_array
   end
   #if date is nil use today's date helper method
   def time_converter_for_date_string
