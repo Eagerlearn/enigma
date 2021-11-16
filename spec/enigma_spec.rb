@@ -34,17 +34,42 @@ RSpec.describe Enigma do
   end
 
   it '#key_converter' do
-
     expect(@enigma.key_converter("02715")).to eq([2, 27, 71, 15])
   end
 
   it '#encrypt' do
     expected = {
-      encryption: "keder ohulw",
-      key: "02715",
-      date: "040895"
-    }
+                encryption: "keder ohulw",
+                key: "02715",
+                date: "040895"
+              }
+    date = @enigma.time_converter_for_date_string
+    expected_2 = {
+                  encryption: "pkfawfqdzry",
+                  key: "02715",
+                  date: "151121"
+                }
     expect(@enigma.encrypt("hello world", "02715", "040895")).to eq(expected)
+    expect(@enigma.encrypt("hello world", "02715")).to eq(expected_2)
+    expect(@enigma.encrypt("hello world")).to be_a(Hash)
+    expect(@enigma.encrypt("hello world")[:key]).to be_a(String)
+  end
+
+  it '#decrypt' do
+    expected = {
+                decryption: "hello world",
+                key: "02715",
+                date: "040895"
+              }
+    date = @enigma.time_converter_for_date_string
+    expected_2 = {
+                  decryption: "hello world",
+                  key: "02715",
+                  date: date
+                }
+    encrypted = @enigma.encrypt("hello world", "02715")
+    expect(@enigma.decrypt("keder ohulw", "02715", "040895")).to eq(expected)
+    expect(@enigma.decrypt(encrypted[:encryption], "02715")).to be_a(Hash)
   end
 end
 
