@@ -78,7 +78,7 @@ class Enigma
 
   def decrypt(decryption, key = key_generator_for_encryption, date = time_converter_for_date_string)
     new_message_array = []
-    decrypt_array = decryption.split(//)
+    decrypt_array = decryption.each_char.to_a
     dates = date_offset_maker(date)
     keys = key_converter(key)
 
