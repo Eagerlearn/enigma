@@ -1,18 +1,23 @@
 require 'date'
 
 class Enigma
+  # attr_reader :encrypted
+
   def initialize
     @alphabet_array = ("a".."z").to_a << " "
-    @key = key_generator_for_encryption
+    #@key = key_generator_for_encryption
+    # @encrypted = Hash.new()
   end
   # generate keys for encryption offset
   def key_generator_for_encryption
     key_string_array = []
     key_string_to_array = key_string_generator_for_encryption.each_char.to_a
+    # require "pry"; binding.pry
     key_string_to_array.each_cons(2) do |pair|
       key_string_array << pair
     end
     keys_integer_array = key_string_array.map do |key|
+      # require "pry"; binding.pry
       key.join.to_i
     end
     keys_integer_array
@@ -48,7 +53,7 @@ class Enigma
     offset_array << date_string[-1].to_i
   end
 
-  def encrypt(encryption, key = @key, date = time_converter_for_encryption)
+  def encrypt(encryption, key = key_generator_for_encryption, date = time_converter_for_date_string)
     new_message_array = []
     encrypt_array = encryption.split(//)
     dates = date_offset_maker(date)
@@ -70,10 +75,10 @@ class Enigma
         new_message_array << @alphabet_array.rotate(first_letter)[0]
       end
     end
-    encrypted_hash = {encryption: new_message_array.join, key: key, date: date}
+    encrypted = {encryption: new_message_array.join, key: key, date: date}
   end
 
-  def decrypt(decryption, key = @key, date = time_converter_for_encryption)
+  def decrypt(decryption, key = key_generator_for_encryption, date = time_converter_for_date_string)
     new_message_array = []
     decrypt_array = decryption.split(//)
     dates = date_offset_maker(date)
@@ -95,6 +100,6 @@ class Enigma
         new_message_array << @alphabet_array.rotate(first_letter)[0]
       end
     end
-    encrypted_hash = {encryption: new_message_array.join, key: key, date: date}
+    decrypted = {decryption: new_message_array.join, key: key, date: date}
   end
 end
